@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:UpcomingMovies.CustomControls;assembly=UpcomingMovies"
+             x:Class="UpcomingMovies.Views.UpcomingMoviesListPage"
+             Title="Upcoming Movies">
+    <Grid>
+        <StackLayout>
+            <SearchBar x:Name="searchBar" Placeholder="Search for a movie, tv show, person..." SearchCommand="{Binding Search}" />
+            <ListView x:Name="resultsListView" VerticalOptions="FillAndExpand" ItemsSource="{Binding Results}" 
+                      HasUnevenRows="True" RefreshCommand="{Binding Refresh}" IsPullToRefreshEnabled="True" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Style="{StaticResource DefaultFrame}" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <custom:BaseFFCacheImage Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Style="{StaticResource DefaultImage}" Source="{Binding PosterPath}"  />
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}"  Style="{StaticResource LabelMovieListName}"/>
+                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Genre}" Style="{StaticResource LabelMovieListGenre}"/>
+                                    <StackLayout Grid.Column="1" Grid.Row="2"  Orientation="Horizontal">
+                                        <custom:BaseFFCacheImage WidthRequest="12" Source="calendar" />
+                                        <Label Text="{Binding ReleaseDate}"  Style="{StaticResource LabelMovieListReleaseDate}"/>
+                                    </StackLayout>
+                                    <BoxView Grid.Column="1" Grid.Row="3" HeightRequest="1" BackgroundColor="DimGray"></BoxView>
+                                    <Label Grid.Column="1" Grid.Row="4" Text="More Info" FontSize="Small"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <ActivityIndicator IsRunning="{Binding Busy}" IsVisible="{Binding Busy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ActivityIndicator>
+    </Grid>
+</ContentPage>
