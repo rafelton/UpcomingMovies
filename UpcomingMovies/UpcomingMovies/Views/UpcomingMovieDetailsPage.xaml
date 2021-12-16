@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:UpcomingMovies.CustomControls;assembly=UpcomingMovies"
+             x:Class="UpcomingMovies.Views.UpcomingMovieDetailsPage" Title="Movie Details">
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <Frame Style="{StaticResource DefaultFrame}" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <custom:BaseFFCacheImage Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Style="{StaticResource DefaultImage}"  Source="{Binding Movie.PosterPath}" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ViewPoster}"/>
+                    </Image.GestureRecognizers>
+                </custom:BaseFFCacheImage>
+                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Movie.Name}" Style="{StaticResource LabelMovieDetailsName}" />
+                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Movie.Genre}" Style="{StaticResource LabelMovieDetailsGenre}" />
+                <StackLayout Grid.Column="1" Grid.Row="2"  Orientation="Horizontal">
+                    <Image WidthRequest="12" Aspect="AspectFit"  Source="calendar" />
+                    <Label Text="{Binding Movie.ReleaseDate}"  Style="{StaticResource LabelMovieDetailsReleaseDate}"/>
+                </StackLayout>
+                <BoxView Grid.Column="1" Grid.Row="3" HeightRequest="1" BackgroundColor="DimGray"></BoxView>
+                <Label Grid.Column="1" Grid.Row="4" Text="Overview" FontSize="Small"/>
+                <Label Grid.Column="1" Grid.Row="5" Text="{Binding Movie.Overview}" FontSize="Small"/>
+            </Grid>
+        </Frame>
+    </StackLayout>
+</ContentPage>
